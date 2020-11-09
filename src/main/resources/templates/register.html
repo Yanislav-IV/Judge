@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Register Page</title>
+    <th:block th:include="~{fragments/head.html}"> </th:block>
+</head>
+
+<body>
+    <div class="container ">
+        <nav th:replace="~{fragments/menu.html}"></nav>
+
+        <div class="container mt-lg-5 border-right border-bottom bg-transparent h-100">
+            <h1 class="w-100 text-light text-right">Register</h1>
+        </div>
+        <div class="row tm-mt-big">
+            <div class="col-12 mx-auto tm-login-col">
+                <div class="bg-white tm-block">
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <form th:action="@{/users/register}" th:object="${userRegisterBindingModel}" th:method="POST" class="tm-login-form">
+                                <th:block th:if="${unableToRegister}">
+                                    <div class="mx-auto">
+                                        <small th:text="${unableToRegister}" class="text-danger"></small>
+                                    </div>
+                                </th:block>
+                                <div class="input-group mt-4">
+                                    <label for="username" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Username</label>
+                                    <input th:field="*{username}" name="username" id="username" placeholder="Enter username" type="text"
+                                           class="form-control" th:classappend="${#fields.hasErrors('username')}?'is-invalid'">
+                                    <div th:if="${#fields.hasErrors('username')}" class="mx-auto">
+                                        <small th:errors="*{username}" class="text-danger"></small>
+                                    </div>
+                                </div>
+                                <div class="input-group mt-4">
+                                    <label for="password" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Password</label>
+                                    <input name="password" type="password" class="form-control validate" id="password" placeholder="Enter password">
+                                    <div th:if="${#fields.hasErrors('password')}" class="mx-auto">
+                                        <small th:errors="*{password}" class="text-danger"></small>
+                                    </div>
+                                </div>
+                                <div class="input-group mt-4">
+                                    <label for="confirmPassword" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Confirm Password</label>
+                                    <input name="confirmPassword" type="password" class="form-control validate" id="confirmPassword" placeholder="Confirm password">
+
+                                </div>
+                                <p th:if="${#fields.hasErrors('confirmPassword')}" class="mx-auto">
+                                    <small th:errors="*{confirmPassword}" class="text-danger"></small>
+                                </p>
+                                <div class="input-group mt-4">
+                                    <label for="email" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Email</label>
+                                    <input th:field="*{email}" name="email" type="email" class="form-control validate" id="email" placeholder="Enter email">
+                                </div>
+                                <p th:if="${#fields.hasErrors('email')}" class="mx-auto">
+                                    <small th:errors="*{email}" class="text-danger"></small>
+                                </p>
+                                <div class="input-group mt-4">
+                                    <label for="git" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Git</label>
+                                    <input th:field="*{git}" name="git" type="text" class="form-control validate" id="git" placeholder="Enter git">
+                                </div>
+                                <p th:if="${#fields.hasErrors('git')}" class="mx-auto">
+                                    <small th:errors="*{git}" class="text-danger"></small>
+                                </p>
+                                <div class="input-group mt-4">
+                                    <button type="submit" class="btn btn-primary d-inline-block mx-auto">Register</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer th:replace="~{fragments/footer.html}"></footer>
+</body>
+</html>
